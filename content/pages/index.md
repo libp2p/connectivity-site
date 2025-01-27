@@ -448,10 +448,7 @@ blocks:
         headline: ACME to the rescue?
         text: >
           ACME is a protocol which allows a server to obtain a certificate from
-          a CA without any manual involvement. There've been
-          [proposals](https://github.com/libp2p/go-libp2p/issues/1360) to use
-          ACME to issue a [Let's Encrypt](https://letsencrypt.org/) certificate
-          for every libp2p node.
+          a CA without any manual involvement.
 
 
           To be able to issue the certificate, the CA needs to verify that the
@@ -467,18 +464,24 @@ blocks:
           value in a DNS TXT record. The server thereby proves that it can
           modify the DNS records for that domain.&#x20;
 
+          While users can bring their own domains for many the process of buying
+          and managing a domain is too cumbersome. To resolve this there are
+          currently two solutions.
 
-          There are a couple of problems with this approach:
+          1. There is now a service run by the
+          [Shipyard team](https://ipshipyard.com) at libp2p.direct to grant users
+          peerID-based domain names so they can use ACME to issue a
+          [Let's Encrypt](https://letsencrypt.org/) certificate for every libp2p node.
+          See <blog post> for more information. 
+          2. Let's Encrypt is [starting to support IP certificates](https://letsencrypt.org/2025/01/16/6-day-and-ip-certs/).
+          While these are great and remove a dependency on libp2p.direct, they are not usable unless the node can run on port
+          80 or 443 which is a difficult restriction (e.g. requires explicit port forwarding vs automatic port mapping, some ISPs block those ports, fails with multiple nodes
+          behind the same IP address, painful if already running a webserver, etc.)
 
+          Note: having browsers able to talk to LAN-based nodes via Secure WebSockets is quite difficult since:
+          1. The domain name approach is sometimes blocked due to measure to protect against DNS Rebinding attacks
+          2. Getting IP certificates for LAN addresses doesn't really make sense for a global CA to hand out
 
-          *   libp2p nodes would still need to possess a domain name.
-
-          *   Using the HTTP / TLS challenge requires the node to start a
-          webserver on port 80 or 443. This might not be possible if the node is
-          running a webserver at the same time.
-
-          *   The DNS challenge requires (programmatic) access to the DNS
-          records for the domain, which requires special configuration.
         language: javascript
     navigationLabel: websocket
     _template: sidebarCards
@@ -492,16 +495,17 @@ blocks:
     notPossible: ''
     workInProgress: ''
     workNotStarted: ''
-    headline: Get Involved
+    headline: Further Reading
     body: >
-      There are solutions to assign certificates to a fleet of nodes, see [an
-      example](<https://words.filippo.io/how-plex-is-doing-https-for-
-      all-its-users/>).
+      *   [libp2p.direct libp2p Blog
+      Article](TBD)
 
+      * [Code and specification backing libp2p.direct, along with a Go client](https://github.com/ipshipyard/p2p-forge/)
 
-      Another option would be using IP certificates. They’re quite rare, and not
-      a lot of CAs support generating them, but this might be worth
-      investigating.
+      * [How Plex assigns certificates to their users](<https://words.filippo.io/how-plex-is-doing-https-for-
+      all-its-users/>)
+
+      * [Let's Encrypt IP certificate announcement](https://letsencrypt.org/2025/01/16/6-day-and-ip-certs/)
     _template: support
   - cardStyle:
       padding: undefined undefined undefined undefined
