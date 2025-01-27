@@ -106,7 +106,7 @@ blocks:
           3.  Security Handshake: TLS 1.3 or Noise (1 RTT)
 
           Establishing and "upgrading" (applying encryption and a stream
-          multiplexer) takes a whopping 4 round trips.
+          multiplexer) takes 4 round trips.
 
 
           And this is the most optimistic assumption. In case the peer doesn’t
@@ -426,10 +426,8 @@ blocks:
 
           4.  Security Handshake (Noise or TLS, 1 RTT)
 
-          4 round trips is quite a long time for setting up a connection.
-
-
-          Unfortunately, this is not even the whole story. In recent years, the
+          Unfortunately, the extra round-trips compared to TCP
+          is not even the whole story. In recent years, the
           web has moved towards ubiquitous encryption, and browsers have started
           enforcing that web content is loaded via encrypted connection.
           Specifically, when on a website loaded via HTTPS, browsers will block
@@ -621,7 +619,7 @@ blocks:
           3.  Noise Handshake (1 RTT)
 
 
-          This is a lot faster than the WebSocket handshake!
+          This is a lot faster than the Secure WebSocket handshake!
 
 
           Step 2 and 3 can potentially be run in parallel, although a bug in
