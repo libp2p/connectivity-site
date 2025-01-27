@@ -105,9 +105,6 @@ blocks:
 
           3.  Security Handshake: TLS 1.3 or Noise (1 RTT)
 
-          4.  Multistream Negotiation of the Stream&#x20;
-              Multiplexer (1 RTT)
-
           Establishing and "upgrading" (applying encryption and a stream
           multiplexer) takes a whopping 4 round trips.
 
@@ -429,10 +426,7 @@ blocks:
 
           4.  Security Handshake (Noise or TLS, 1 RTT)
 
-          5.  Multistream stream multiplexer negotiation (1 RTT)
-
-
-          5 round trips is quite a long time for setting up a connection.
+          4 round trips is quite a long time for setting up a connection.
 
 
           Unfortunately, this is not even the whole story. In recent years, the
@@ -444,9 +438,9 @@ blocks:
 
 
           A WebSocket Secure connection uses HTTPS to perform the Upgrade
-          request. That means that in addition to the 5 round trips listed
+          request. That means that in addition to the 4 round trips listed
           above, there’ll be another roundtrip for the TLS handshake, increasing
-          the handshake latency to 6 RTTs.
+          the handshake latency to 5 RTTs.
         language: javascript
       - cardType: basic
         headline: TLS Certificate Verification in the Browser
@@ -765,7 +759,7 @@ blocks:
 
 
           1.  Establishing a connection to the relay: 2 - 3 RTTs (when using
-          WebTransport or WebRTC), 6 RTTs (when using WebSocket)
+          WebTransport or WebRTC), 5 RTTs (when using Secure WebSocket)
 
           2.  Establishing a connection to the remote node via the relay (1 RTT)
 
