@@ -751,13 +751,12 @@ blocks:
           For the browser to public node use case:
 
 
-          1.  Stun Binding Request (1 RTT)
+          1.  Stun Binding Request (2 RTT)
 
           2.  DTLS handshake (3 RTT)
 
           3.  libp2p Noise handshake (1 RTT)
 
-          4. TODO: fix
 
       - cardType: basic
         headline: Counting Roundtrips (WebRTC)
