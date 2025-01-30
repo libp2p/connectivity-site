@@ -751,8 +751,7 @@ blocks:
           For the browser to public node use case:
 
 
-          1.  Stun Binding Request (Chrome, Safari: 2 RTT, Firefox: 1 RTT)
-``
+          1.  Stun Binding Request:  (Chrome, Safari: 2 RTT, Firefox: 1 RTT)
 
           2.  DTLS handshake (3 RTT)
 
