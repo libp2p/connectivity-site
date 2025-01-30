@@ -468,11 +468,10 @@ blocks:
           and managing a domain is too cumbersome. To resolve this there are
           currently two solutions.
 
-          1. There is now a service run by the
-          [Shipyard team](https://ipshipyard.com) at libp2p.direct to grant users
-          peerID-based domain names so they can use ACME to issue a
-          [Let's Encrypt](https://letsencrypt.org/) certificate for every libp2p node.
-          See <blog post> for more information. 
+          1. AutoTLS is a service run by the [Shipyard team](https://ipshipyard.com) granting users
+          a DNS name unique to their PeerID at `[PeerID].libp2p.direct` so they can use ACME to issue a
+          [Let's Encrypt](https://letsencrypt.org/) wildcard TLS certificate for every libp2p node.
+          See [AutoTLS Release Blog Post](https://blog.libp2p.io/autotls) for more information.
           2. Let's Encrypt is [starting to support IP certificates](https://letsencrypt.org/2025/01/16/6-day-and-ip-certs/).
           While these are great and remove a dependency on libp2p.direct, they are not usable unless the node can run on port
           80 or 443 which is a difficult restriction (e.g. requires explicit port forwarding vs automatic port mapping, some ISPs block those ports, fails with multiple nodes
@@ -497,8 +496,7 @@ blocks:
     workNotStarted: ''
     headline: Further Reading
     body: >
-      *   [libp2p.direct libp2p Blog
-      Article](TBD)
+      * [AutoTLS (libp2p.direct) Release Blog Post](https://blog.libp2p.io/autotls)
 
       * [Code and specification backing libp2p.direct, along with a Go client](https://github.com/ipshipyard/p2p-forge/)
 
