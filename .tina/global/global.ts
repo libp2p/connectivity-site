@@ -21,6 +21,21 @@ export const globalSchema: TinaCollection = {
       name: "siteUrl",
     },
     {
+      "type": "string",
+      "label": "Site Title",
+      "name": "siteTitle"
+    },
+    {
+      "type": "string",
+      "label": "Site Description",
+      "name": "siteDescription"
+    },
+    {
+      "type": "string",
+      "label": "Site Image Src",
+      "name": "siteImageSrc"
+    },
+    {
       type: "string",
       label: "Google Tag Manager ID",
       name: "gtmId",

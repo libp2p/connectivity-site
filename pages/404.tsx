@@ -31,6 +31,9 @@ export const getStaticProps = async () => {
         getGlobalDocument(relativePath: "index.json") {
           data {
             siteUrl
+            siteTitle
+            siteDescription
+            siteImageSrc
             favicon
             gtmId
             redirects {

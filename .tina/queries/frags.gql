@@ -2,6 +2,9 @@ fragment LayoutQueryFragment on Query {
   getGlobalDocument(relativePath: "index.json") {
     data {
       siteUrl
+      siteTitle
+      siteDescription
+      siteImageSrc
       favicon
       gtmId
       desktopWidth
