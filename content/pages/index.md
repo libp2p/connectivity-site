@@ -468,7 +468,7 @@ blocks:
           and managing a domain is too cumbersome. To resolve this there are
           currently two solutions.
 
-          1. AutoTLS is a service run by the [Shipyard team](https://ipshipyard.com) granting users
+          1. [AutoTLS](https://blog.libp2p.io/autotls/) is a service run by the [Shipyard team](https://ipshipyard.com) granting users
           a DNS name unique to their PeerID at `[PeerID].libp2p.direct` so they can use ACME to issue a
           [Let's Encrypt](https://letsencrypt.org/) wildcard TLS certificate for every libp2p node.
           See [AutoTLS Release Blog Post](https://blog.libp2p.io/autotls) for more information.
