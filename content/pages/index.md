@@ -465,20 +465,28 @@ blocks:
           modify the DNS records for that domain.&#x20;
 
           While users can bring their own domains for many the process of buying
-          and managing a domain is too cumbersome. To resolve this there are
-          currently two solutions.
+          and managing a domain is too cumbersome. 
+          
+          ---
+          
+          ## To resolve this there are currently two solutions:
+
 
           1. [AutoTLS](https://blog.libp2p.io/autotls/) is a service run by the [Shipyard team](https://ipshipyard.com) granting users
           a DNS name unique to their PeerID at `[PeerID].libp2p.direct` so they can use ACME to issue a
           [Let's Encrypt](https://letsencrypt.org/) wildcard TLS certificate for every libp2p node.
           See [AutoTLS Release Blog Post](https://blog.libp2p.io/autotls) for more information.
+
           2. Let's Encrypt is [starting to support IP certificates](https://letsencrypt.org/2025/01/16/6-day-and-ip-certs/).
           While these are great and remove a dependency on libp2p.direct, they are not usable unless the node can run on port
           80 or 443 which is a difficult restriction (e.g. requires explicit port forwarding vs automatic port mapping, some ISPs block those ports, fails with multiple nodes
           behind the same IP address, painful if already running a webserver, etc.)
 
+
           Note: having browsers able to talk to LAN-based nodes via Secure WebSockets is quite difficult since:
+
           1. The domain name approach is sometimes blocked due to measure to protect against DNS Rebinding attacks
+
           2. Getting IP certificates for LAN addresses doesn't really make sense for a global CA to hand out
 
         language: javascript
