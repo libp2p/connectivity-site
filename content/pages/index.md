@@ -105,11 +105,8 @@ blocks:
 
           3.  Security Handshake: TLS 1.3 or Noise (1 RTT)
 
-          4.  Multistream Negotiation of the Stream&#x20;
-              Multiplexer (1 RTT)
-
           Establishing and "upgrading" (applying encryption and a stream
-          multiplexer) takes a whopping 4 round trips.
+          multiplexer) takes 4 round trips.
 
 
           And this is the most optimistic assumption. In case the peer doesn’t
@@ -429,13 +426,8 @@ blocks:
 
           4.  Security Handshake (Noise or TLS, 1 RTT)
 
-          5.  Multistream stream multiplexer negotiation (1 RTT)
-
-
-          5 round trips is quite a long time for setting up a connection.
-
-
-          Unfortunately, this is not even the whole story. In recent years, the
+          Unfortunately, the extra round-trips compared to TCP
+          is not even the whole story. In recent years, the
           web has moved towards ubiquitous encryption, and browsers have started
           enforcing that web content is loaded via encrypted connection.
           Specifically, when on a website loaded via HTTPS, browsers will block
@@ -444,9 +436,9 @@ blocks:
 
 
           A WebSocket Secure connection uses HTTPS to perform the Upgrade
-          request. That means that in addition to the 5 round trips listed
+          request. That means that in addition to the 4 round trips listed
           above, there’ll be another roundtrip for the TLS handshake, increasing
-          the handshake latency to 6 RTTs.
+          the handshake latency to 5 RTTs.
         language: javascript
       - cardType: basic
         headline: TLS Certificate Verification in the Browser
@@ -456,10 +448,7 @@ blocks:
         headline: ACME to the rescue?
         text: >
           ACME is a protocol which allows a server to obtain a certificate from
-          a CA without any manual involvement. There've been
-          [proposals](https://github.com/libp2p/go-libp2p/issues/1360) to use
-          ACME to issue a [Let's Encrypt](https://letsencrypt.org/) certificate
-          for every libp2p node.
+          a CA without any manual involvement.
 
 
           To be able to issue the certificate, the CA needs to verify that the
@@ -475,18 +464,31 @@ blocks:
           value in a DNS TXT record. The server thereby proves that it can
           modify the DNS records for that domain.&#x20;
 
+          While users can bring their own domains for many the process of buying
+          and managing a domain is too cumbersome. 
+          
+          ---
+          
+          ## To resolve this there are currently two solutions:
 
-          There are a couple of problems with this approach:
+
+          1. [AutoTLS](https://blog.libp2p.io/autotls/) is a service run by the [Shipyard team](https://ipshipyard.com) granting users
+          a DNS name unique to their PeerID at `[PeerID].libp2p.direct` so they can use ACME to issue a
+          [Let's Encrypt](https://letsencrypt.org/) wildcard TLS certificate for every libp2p node.
+          See [AutoTLS Release Blog Post](https://blog.libp2p.io/autotls) for more information.
+
+          2. Let's Encrypt is [starting to support IP certificates](https://letsencrypt.org/2025/01/16/6-day-and-ip-certs/).
+          While these are great and remove a dependency on libp2p.direct, they are not usable unless the node can run on port
+          80 or 443 which is a difficult restriction (e.g. requires explicit port forwarding vs automatic port mapping, some ISPs block those ports, fails with multiple nodes
+          behind the same IP address, painful if already running a webserver, etc.)
 
 
-          *   libp2p nodes would still need to possess a domain name.
+          Note: having browsers able to talk to LAN-based nodes via Secure WebSockets is quite difficult since:
 
-          *   Using the HTTP / TLS challenge requires the node to start a
-          webserver on port 80 or 443. This might not be possible if the node is
-          running a webserver at the same time.
+          1. The domain name approach is sometimes blocked due to measure to protect against DNS Rebinding attacks
 
-          *   The DNS challenge requires (programmatic) access to the DNS
-          records for the domain, which requires special configuration.
+          2. Getting IP certificates for LAN addresses doesn't really make sense for a global CA to hand out
+
         language: javascript
     navigationLabel: websocket
     _template: sidebarCards
@@ -500,16 +502,16 @@ blocks:
     notPossible: ''
     workInProgress: ''
     workNotStarted: ''
-    headline: Get Involved
+    headline: Further Reading
     body: >
-      There are solutions to assign certificates to a fleet of nodes, see [an
-      example](<https://words.filippo.io/how-plex-is-doing-https-for-
-      all-its-users/>).
+      * [AutoTLS (libp2p.direct) Release Blog Post](https://blog.libp2p.io/autotls)
 
+      * [Code and specification backing libp2p.direct, along with a Go client](https://github.com/ipshipyard/p2p-forge/)
 
-      Another option would be using IP certificates. They’re quite rare, and not
-      a lot of CAs support generating them, but this might be worth
-      investigating.
+      * [How Plex assigns certificates to their users](<https://words.filippo.io/how-plex-is-doing-https-for-
+      all-its-users/>)
+
+      * [Let's Encrypt IP certificate announcement](https://letsencrypt.org/2025/01/16/6-day-and-ip-certs/)
     _template: support
   - cardStyle:
       padding: undefined undefined undefined undefined
@@ -627,7 +629,7 @@ blocks:
           3.  Noise Handshake (1 RTT)
 
 
-          This is a lot faster than the WebSocket handshake!
+          This is a lot faster than the Secure WebSocket handshake!
 
 
           Step 2 and 3 can potentially be run in parallel, although a bug in
@@ -765,7 +767,7 @@ blocks:
 
 
           1.  Establishing a connection to the relay: 2 - 3 RTTs (when using
-          WebTransport or WebRTC), 6 RTTs (when using WebSocket)
+          WebTransport or WebRTC), 5 RTTs (when using Secure WebSocket)
 
           2.  Establishing a connection to the remote node via the relay (1 RTT)
 
