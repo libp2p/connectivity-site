@@ -1,5 +1,8 @@
 {
-  "siteUrl": "microgen.vercel.app",
+  "siteUrl": "https://connectivity.libp2p.io/",
+  "siteTitle": "libp2p Connectivity",
+  "siteDescription": "libp2p enables universal connectivity between nodes across different network positions by supporting a wide range of transport protocols.",
+  "siteImageSrc": "https://connectivity.libp2p.io/og_image.png",
   "gtmId": "",
   "favicon": "https://res.cloudinary.com/protocolai/image/upload/v1663601050/libp2p/favicon-libp2p_lzckoc.png",
   "desktopWidth": "1150",

@@ -39,19 +39,17 @@ export const Layout = ({
       <ThemeContext.Provider value={globalData}>
         <Head>
           <title>{pageData?.meta?.pageTitle}</title>
-          <meta name="description" content={pageData?.meta?.pageDescription} />
+          <meta name="description" content={pageData?.meta?.pageDescription || globalData?.siteDescription}/>
           <meta name="author" content="Protocol Labs"></meta>
           <link rel="icon" type="image/png" sizes="48x48" href={globalData?.favicon} />
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta property="og:site_name" content={globalData?.siteUrl} />
+          <meta property="og:site_name" content={globalData?.siteTitle} />
           <meta property="og:url" content={globalData?.siteUrl} />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content={pageData?.meta?.pageTitle} />
-          <meta property="og:description" content={pageData?.meta?.pageDescription} />
-          {pageData?.meta?.siteImageSrc &&
-            <meta property="og:image" content={pageData?.meta?.siteImageSrc} />
-          }
+          <meta property="og:title" content={pageData?.meta?.pageTitle || globalData?.siteTitle} />
+          <meta property="og:description" content={pageData?.meta?.pageDescription || globalData?.siteDescription} />
+          <meta property="og:image" content={pageData?.meta?.siteImageSrc || globalData?.siteImageSrc} />
           <style
             id="customProperties"
             // There is logic in the TypeControl component that figures out the custom property
